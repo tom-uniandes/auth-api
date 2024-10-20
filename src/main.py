@@ -7,6 +7,7 @@ from src.blueprints.authentication import authentication_blueprint
 import os
 import traceback
 import logging
+import json
 
 import firebase_admin
 from firebase_admin import credentials
@@ -24,6 +25,12 @@ logging.basicConfig(level=os.environ.get("LOG_LEVEL", "INFO"))
 logger = logging.getLogger(__name__)
 
 def init_firebase():
+    firebase_key_string = os.environ.get("PRIVATE_KEY_FIREBASE")
+    json_key_fireabse = json.loads(firebase_key_string)
+
+    with open('./abc-call-firebase-adminsdk.json', 'w') as json_file:
+        json.dump(json_key_fireabse, json_file, indent=4)
+
     cred = credentials.Certificate("./abc-call-firebase-adminsdk.json")
     firebase_admin.initialize_app(cred)
 
