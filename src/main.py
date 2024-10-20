@@ -38,7 +38,7 @@ def init_firebase():
 def handle_exception(err):
     trace = traceback.format_exc()
     logger.info("Log error: " + str(trace))
-    return jsonify({"msg": err.description}), err.code
+    return jsonify({"message": err.description}), err.code
 
 init_firebase()
 
