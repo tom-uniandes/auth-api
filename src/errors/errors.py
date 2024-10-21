@@ -14,3 +14,6 @@ class Unavailable(ApiError):
 
 class Bad_Request(ApiError):
     code = HTTPStatus.BAD_REQUEST
+
+class Unauthorized(ApiError):
+    code = HTTPStatus.UNAUTHORIZED
