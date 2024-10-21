@@ -34,4 +34,3 @@ class Login(BaseCommannd):
             }
         else:
             raise Unauthorized("Usuario no autorizado")
-        
