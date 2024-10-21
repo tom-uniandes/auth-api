@@ -1,6 +1,7 @@
 from flask import jsonify, request, Blueprint
 
 from src.commands.register_command import Register
+from src.commands.login_command import Login
 from src.commands.ping_command import Ping
 
 authentication_blueprint = Blueprint('authentication', __name__)
@@ -13,5 +14,6 @@ def register():
 
 @authentication_blueprint.route('/auth/login', methods = ['POST'])
 def login():
-    response = Ping().execute()
+    json = request.get_json()
+    response = Login(json).execute()
     return response, 200
