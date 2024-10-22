@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
 class ApiError(Exception):
-    code = HTTPStatus.UNPROCESSABLE_ENTITY
+    code = HTTPStatus.INTERNAL_SERVER_ERROR
 
     def __init__(self, description="Lo sentimos! ha ocurrido un error, intentelo nuevamente"):
         self.description = description

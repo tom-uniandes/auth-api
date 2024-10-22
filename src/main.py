@@ -7,10 +7,6 @@ from src.blueprints.authentication import authentication_blueprint
 import os
 import traceback
 import logging
-import json
-
-import firebase_admin
-from firebase_admin import credentials
 
 app = Flask(__name__)
 
@@ -24,24 +20,11 @@ app.register_blueprint(authentication_blueprint)
 logging.basicConfig(level=os.environ.get("LOG_LEVEL", "INFO"))
 logger = logging.getLogger(__name__)
 
-def init_firebase():
-    if os.environ.get("PRIVATE_KEY_FIREBASE"):
-        firebase_key_string = os.environ.get("PRIVATE_KEY_FIREBASE")
-        json_key_fireabse = json.loads(firebase_key_string)
-
-        with open('./abc-call-firebase-adminsdk.json', 'w') as json_file:
-            json.dump(json_key_fireabse, json_file, indent=4)
- 
-    cred = credentials.Certificate("./abc-call-firebase-adminsdk.json")
-    firebase_admin.initialize_app(cred)
-
 @app.errorhandler(ApiError)
 def handle_exception(err):
     trace = traceback.format_exc()
     logger.info("Log error: " + str(trace))
     return jsonify({"message": err.description}), err.code
-
-init_firebase()
 
 
 if __name__ == "__main__":
