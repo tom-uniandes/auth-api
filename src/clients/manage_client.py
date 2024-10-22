@@ -11,13 +11,5 @@ class ManageClient:
         self.headers = {"Content-Type": "application/json"}
 
     def register_client(self, data):
-        try:
-            response = requests.post(self.manage_client_url, json=data, headers=self.headers)
-        
-            if response.status_code == 400:
-                raise Bad_Request(response.json().get("msg", "Error en los campos, por favor revise la informacion ingresada"))
-            return response.json()
-        
-        except requests.exceptions.ConnectionError:
-            raise Unavailable()
+        return requests.post(self.manage_client_url, json=data, headers=self.headers) 
     
