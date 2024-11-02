@@ -13,9 +13,11 @@ class Register(BaseCommannd):
         self.name = json.get('name', '').strip()
         self.email = json.get('email', '').strip().lower()
         self.password = json.get("password", "").strip()
+        self.id_type = json.get('idType', '').strip()
         self.id_number = json.get('idNumber', '').strip()
         self.phone_number = json.get('phoneNumber', '').strip()
         self.company = json.get('company', '')
+        self.rol = json.get('rol', '')
 
         API_KEY = ""
         if os.environ.get("API_KEY_FIREBASE"):
@@ -50,8 +52,10 @@ class Register(BaseCommannd):
                 "name":self.name,
                 "email":self.email,
                 "idNumber":self.id_number,
+                "idType":self.id_type,
                 "phoneNumber":self.phone_number,
-                "company":self.company
+                "company":self.company,
+                "rol":self.rol
             }
             self.register_client(data)
             return {'message': 'Registro exitoso'}
