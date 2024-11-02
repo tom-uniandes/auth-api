@@ -8,6 +8,10 @@ import os
 import traceback
 import logging
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 app = Flask(__name__)
 
 app_context = app.app_context()
