@@ -12,6 +12,7 @@ validators = "*"
 psycopg2-binary = "*"
 requests = "*"
 python-dotenv = "*"
+pyjwt = "*"
 
 pytest = "~=7.2.0"
 pytest-cov = "~=4.0.0"
