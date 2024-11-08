@@ -52,7 +52,7 @@ class Login(BaseCommannd):
                 "plan": data_user.get("plan")
             }
         else:
-            raise Unauthorized("Usuario no autorizado")
+            raise Unauthorized("Correo y/o contraseña incorrecta")
         
     def getDataUser(self, user_id):
         try:

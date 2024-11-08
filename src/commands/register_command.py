@@ -1,5 +1,5 @@
 from .base_command import BaseCommannd
-from src.errors.errors import Conflict, ApiError, Bad_Request, Unavailable
+from src.errors.errors import Conflict, ApiError, Bad_Request, Precondition_Failed
 from src.clients.manage_client import ManageClient
 import requests
 import logging
@@ -94,14 +94,20 @@ class Register(BaseCommannd):
         
         if response.status_code == 400:
             logger.info("Log error: service manejo clientes con status " + str(response.status_code))
-            logger.info("Response error: " + str(response.json().get("msg")))
+            logger.info("Response error: " + str(response.json().get("message")))
             self.delete_user()
-            raise Bad_Request(response.json().get("msg"))
+            raise Bad_Request(response.json().get("message"))
+        
+        if response.status_code == 412:
+            logger.info("Log error: service manejo clientes con status " + str(response.status_code))
+            logger.info("Response error: " + str(response.json().get("message")))
+            self.delete_user()
+            raise Precondition_Failed(response.json().get("message"))
         
         if response.status_code != 201:
             logger.info("Log error: service manejo clientes con status " + str(response.status_code))
             self.delete_user()
-            raise Unavailable()
+            raise ApiError()
             
 
 
