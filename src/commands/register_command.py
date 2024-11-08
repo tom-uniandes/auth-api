@@ -1,5 +1,5 @@
 from .base_command import BaseCommannd
-from src.errors.errors import Conflict, ApiError, Bad_Request, Unavailable
+from src.errors.errors import Conflict, ApiError, Bad_Request, Precondition_Failed
 from src.clients.manage_client import ManageClient
 import requests
 import logging
@@ -18,6 +18,7 @@ class Register(BaseCommannd):
         self.phone_number = json.get('phoneNumber', '').strip()
         self.company = json.get('company', '')
         self.rol = json.get('rol', '')
+        self.plan = json.get('plan', '')
 
         API_KEY = ""
         if os.environ.get("API_KEY_FIREBASE"):
@@ -55,7 +56,8 @@ class Register(BaseCommannd):
                 "idType":self.id_type,
                 "phoneNumber":self.phone_number,
                 "company":self.company,
-                "rol":self.rol
+                "rol":self.rol,
+                "plan":self.plan
             }
             self.register_client(data)
             return {'message': 'Registro exitoso'}
@@ -92,14 +94,20 @@ class Register(BaseCommannd):
         
         if response.status_code == 400:
             logger.info("Log error: service manejo clientes con status " + str(response.status_code))
-            logger.info("Response error: " + str(response.json().get("msg")))
+            logger.info("Response error: " + str(response.json().get("message")))
             self.delete_user()
-            raise Bad_Request(response.json().get("msg"))
+            raise Bad_Request(response.json().get("message"))
+        
+        if response.status_code == 412:
+            logger.info("Log error: service manejo clientes con status " + str(response.status_code))
+            logger.info("Response error: " + str(response.json().get("message")))
+            self.delete_user()
+            raise Precondition_Failed(response.json().get("message"))
         
         if response.status_code != 201:
             logger.info("Log error: service manejo clientes con status " + str(response.status_code))
             self.delete_user()
-            raise Unavailable()
+            raise ApiError()
             
 
 
