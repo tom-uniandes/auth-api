@@ -1,5 +1,6 @@
 from .base_command import BaseCommannd
 from src.errors.errors import Unauthorized, ApiError
+from src.clients.manage_client import ManageClient
 import requests
 import logging
 import os
@@ -37,11 +38,25 @@ class Login(BaseCommannd):
         if response.status_code == 200:
             data = response.json()
             id_token = data['idToken']
+            user_id = data['localId']
             expires_in = data['expiresIn']
+
+            response_data_user = self.getDataUser(user_id=user_id)
+            data_user = response_data_user.json()
 
             return {
                 "token": id_token,
                 "expiresIn": expires_in,
+                "rol": data_user.get("rol"),
+                "company": data_user.get("company"),
+                "plan": data_user.get("plan")
             }
         else:
-            raise Unauthorized("Usuario no autorizado")
+            raise Unauthorized("Correo y/o contraseña incorrecta")
+        
+    def getDataUser(self, user_id):
+        try:
+            return ManageClient().get_data_user(user_id)
+        except Exception as e:
+            logger.info("Log error: service manejo clientes con excepcion para obtener data del usuario")
+            raise ApiError()

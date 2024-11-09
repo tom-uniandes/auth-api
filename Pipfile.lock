@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d77966b21c5d8782643164608989c1f66a31880567ee006d2685714f151bc24b"
+            "sha256": "4216cd8c7807186f76b4a8e4489c916a60639f76874f8fabfe5a32d9cc1e3446"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -246,12 +246,12 @@
         },
         "faker": {
             "hashes": [
-                "sha256:3608c7fcac2acde0eaa6da28dae97628f18f14d54eaa2a92b96ae006f1621bd7",
-                "sha256:4cd0c5ea4bc1e4c902967f6e662f5f5da69f1674d9a94f54e516d27f3c2a6a16"
+                "sha256:4a82b2908cd19f3bba1a4da2060cc4eb18a40410ccdf9350d071d79dc92fe3ce",
+                "sha256:aa31b52cdae3673d6a78b4857c7bcdc0e98f201a5cb77d7827fa9e6b5876da94"
             ],
             "index": "auth-api",
             "markers": "python_version >= '3.8'",
-            "version": "==30.8.0"
+            "version": "==30.8.2"
         },
         "flask": {
             "hashes": [
@@ -371,12 +371,12 @@
         },
         "marshmallow": {
             "hashes": [
-                "sha256:82f20a2397834fe6d9611b241f2f7e7b680ed89c49f84728a1ad937be6b4bdf4",
-                "sha256:98d8827a9f10c03d44ead298d2e99c6aea8197df18ccfad360dae7f89a50da2e"
+                "sha256:3a8dfda6edd8dcdbf216c0ede1d1e78d230a6dc9c5a088f58c4083b974a0d468",
+                "sha256:fece2eb2c941180ea1b7fcbd4a83c51bfdd50093fdd3ad2585ee5e1df2508491"
             ],
             "index": "auth-api",
             "markers": "python_version >= '3.9'",
-            "version": "==3.23.0"
+            "version": "==3.23.1"
         },
         "packaging": {
             "hashes": [
@@ -468,6 +468,15 @@
             "markers": "python_version >= '3.8'",
             "version": "==2.9.10"
         },
+        "pyjwt": {
+            "hashes": [
+                "sha256:3b02fb0f44517787776cf48f2ae25d8e14f300e6d7545a4315cee571a415e850",
+                "sha256:7e1e5b56cc735432a7369cbfa0efe50fa113ebecdc04ae6922deba8b84582d0c"
+            ],
+            "index": "auth-api",
+            "markers": "python_version >= '3.8'",
+            "version": "==2.9.0"
+        },
         "pytest": {
             "hashes": [
                 "sha256:130328f552dcfac0b1cec75c12e3f005619dc5f874f0a06e8ff7263f0ee6225e",
@@ -516,8 +525,17 @@
                 "sha256:37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3",
                 "sha256:a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2'",
             "version": "==2.9.0.post0"
+        },
+        "python-dotenv": {
+            "hashes": [
+                "sha256:e324ee90a023d808f1959c46bcbc04446a10ced277783dc6ee09987c37ec10ca",
+                "sha256:f7b63ef50f1b690dddf550d03497b66d609393b40b564ed0d674909a68ebf16a"
+            ],
+            "index": "auth-api",
+            "markers": "python_version >= '3.8'",
+            "version": "==1.0.1"
         },
         "requests": {
             "hashes": [
@@ -533,7 +551,7 @@
                 "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926",
                 "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2'",
             "version": "==1.16.0"
         },
         "tomli": {
@@ -571,11 +589,11 @@
         },
         "werkzeug": {
             "hashes": [
-                "sha256:02c9eb92b7d6c06f31a782811505d2157837cea66aaede3e217c7c27c039476c",
-                "sha256:34f2371506b250df4d4f84bfe7b0921e4762525762bbd936614909fe25cd7306"
+                "sha256:8cd39dfbdfc1e051965f156163e2974e52c210f130810e9ad36858f0fd3edad4",
+                "sha256:a71124d1ef06008baafa3d266c02f56e1836a5984afd6dd6c9230669d60d9fb5"
             ],
-            "markers": "python_version >= '3.8'",
-            "version": "==3.0.4"
+            "markers": "python_version >= '3.9'",
+            "version": "==3.1.1"
         },
         "zipp": {
             "hashes": [

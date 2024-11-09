@@ -17,3 +17,6 @@ class Bad_Request(ApiError):
 
 class Unauthorized(ApiError):
     code = HTTPStatus.UNAUTHORIZED
+
+class Precondition_Failed(ApiError):
+    code = HTTPStatus.PRECONDITION_FAILED

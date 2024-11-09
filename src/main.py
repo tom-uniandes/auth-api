@@ -3,10 +3,15 @@ from src.errors.errors import ApiError
 
 from src.blueprints.ping import ping_blueprint
 from src.blueprints.authentication import authentication_blueprint
+from src.blueprints.authorization import authorization_blueprint
 
 import os
 import traceback
 import logging
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -16,6 +21,7 @@ app_context.push()
 
 app.register_blueprint(ping_blueprint)
 app.register_blueprint(authentication_blueprint)
+app.register_blueprint(authorization_blueprint)
 
 logging.basicConfig(level=os.environ.get("LOG_LEVEL", "INFO"))
 logger = logging.getLogger(__name__)
