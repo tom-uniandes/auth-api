@@ -71,8 +71,7 @@ class TestAuthenticationBlueprint(unittest.TestCase):
     def test_logout_user(self):
         with app.test_client() as test_client:
             response = test_client.post('/auth/logout', 
-                headers={'Authorization': self.data_factory.uuid4()},
-                json={}
+                headers={'Authorization': self.data_factory.uuid4()}
             )
 
         assert response.status_code == 200
