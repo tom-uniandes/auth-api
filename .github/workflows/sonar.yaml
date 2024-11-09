@@ -30,8 +30,7 @@ jobs:
       - name: pruebas+coverage
         id: pruebas
         run: |
-          python -m coverage run -m unittest discover -s tests -v
-          coverage report
+          pipenv run pytest --cov=src tests/
           python -m coverage xml -i
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
