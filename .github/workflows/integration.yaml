@@ -24,7 +24,7 @@ jobs:
           pip install pipenv
           pipenv install
       - name: Run tests
-        run: pipenv run pytest --cov=src -v -s --cov-fail-under=70
+        run: pipenv run pytest --cov=src -v -s --cov-fail-under=80
 
   merge-branches:
     name: Merge Master into Develop and Develop into Master
