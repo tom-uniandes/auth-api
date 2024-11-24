@@ -1,0 +1,113 @@
+{
+    "/auth/register":{
+        "roles":{},
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_AUTH_API"
+    },
+    "/auth/login":{
+        "roles":{},
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_AUTH_API"
+    },
+    "/auth/verify-authorization":{
+        "roles":{},
+        "origin_request": ["web","mobile"],
+        "name_api_key": "API_KEY_AUTH_API"
+    },
+    "/clients/create_client":{
+        "roles":{},
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_CLIENTE"
+    },
+    "/clients/get_client/": {
+        "roles":{},
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_CLIENTE"
+    },
+    "/clients/update_client_plan": {
+        "roles": {
+            "CLIENTE": ["EMPRENDEDOR", "EMPRESARIO", "EMPRESARIO_PLUS"]
+        },
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_CLIENTE"
+    },
+    "/incidents/get_incidents/":{
+        "roles": {
+            "AGENTE": ["EMPRENDEDOR", "EMPRESARIO", "EMPRESARIO_PLUS"]
+        },
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_INCIDENTE"
+    },
+    "/incidents/get_user/":{
+        "roles": {
+            "AGENTE": ["EMPRENDEDOR", "EMPRESARIO", "EMPRESARIO_PLUS"]
+        },
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_INCIDENTE"
+    },
+    "/incidents/get_incident/":{
+        "roles": {
+            "AGENTE": ["EMPRENDEDOR", "EMPRESARIO", "EMPRESARIO_PLUS"]
+        },
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_INCIDENTE"
+    },
+    "/incidents/public/get_incident/":{
+        "roles": {},
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_INCIDENTE"
+    },
+    "/incidents/search_incident":{
+        "roles": {
+            "AGENTE": ["EMPRENDEDOR", "EMPRESARIO", "EMPRESARIO_PLUS"]
+        },
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_INCIDENTE"
+    },
+    "/incidents/public/search_incident":{
+        "roles": {},
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_INCIDENTE"
+    },
+    "/incidents/create_user":{
+        "roles": {
+            "AGENTE": ["EMPRENDEDOR", "EMPRESARIO", "EMPRESARIO_PLUS"]
+        },
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_INCIDENTE"
+    },
+    "/incidents/create_incident":{
+        "roles": {
+            "AGENTE": ["EMPRENDEDOR", "EMPRESARIO", "EMPRESARIO_PLUS"]
+        },
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_INCIDENTE"
+    },
+    "/incidents/update_incident_response":{
+        "roles": {
+            "AGENTE": ["EMPRENDEDOR", "EMPRESARIO", "EMPRESARIO_PLUS"]
+        },
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_INCIDENTE"
+    },
+    "/analitica/get_incidents/":{
+        "roles": {
+            "CLIENTE": ["EMPRESARIO", "EMPRESARIO_PLUS"]
+        },
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_ANALITICA"
+    },
+    "/chatbot/getnode":{
+        "roles": {},
+        "origin_request": ["mobile"],
+        "name_api_key": "API_KEY_CHATBOT"
+    },
+    "/chatbot/getsolutions":{
+        "roles": {
+            "AGENTE": ["EMPRESARIO_PLUS"]
+        },
+        "origin_request": ["web"],
+        "name_api_key": "API_KEY_CHATBOT"
+    }
+    
+}

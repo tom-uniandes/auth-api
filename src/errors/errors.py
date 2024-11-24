@@ -20,3 +20,6 @@ class Unauthorized(ApiError):
 
 class Precondition_Failed(ApiError):
     code = HTTPStatus.PRECONDITION_FAILED
+
+class Forbidden(ApiError):
+    code = HTTPStatus.FORBIDDEN
