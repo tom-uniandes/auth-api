@@ -11,7 +11,7 @@
     },
     "/auth/verify-authorization":{
         "roles":{},
-        "origin_request": ["web"],
+        "origin_request": ["web","mobile"],
         "name_api_key": "API_KEY_AUTH_API"
     },
     "/clients/create_client":{

@@ -4,6 +4,7 @@ from math import log
 from .base_command import BaseCommannd
 from src.errors.errors import Forbidden, Unauthorized, ApiError
 from src.clients.manage_client import ManageClient
+from src.util.validate_origin_api_key import ValidateOriginApiKey
 import requests
 import logging
 from flask import request, make_response, jsonify
@@ -18,6 +19,7 @@ class Authorization(BaseCommannd):
     def __init__(self):
         self.authorization_header = request.headers.get('Authorization')
         self.transaction_key = request.headers.get('X-Abcall-Transaction')
+        self.transaction_auth_key = request.headers.get('X-Abcall-Transaction-Auth')
         self.origin_request = request.headers.get('X-Abcall-Origin-Request')
 
         if self.authorization_header and self.authorization_header.split(" ")[0] == "Bearer":
@@ -25,19 +27,22 @@ class Authorization(BaseCommannd):
 
 
     def execute(self):
-        if self.transaction_key != os.environ.get("API_KEY_AUTH_API"):
+        if self.transaction_auth_key and self.transaction_auth_key != os.environ.get("API_KEY_AUTH_API"):
             logger.info("Api key recibida no corresponde a la de auth-api")
             raise Forbidden("Acceso denegado al origen de la petición")
         
         if self.authorization_header and self.transaction_key and self.origin_request == "web":
+            ValidateOriginApiKey(self.transaction_key, self.transaction_auth_key).verify_api_Key_frontend()
             return self.validate_access_web_authentication()
         elif self.transaction_key and self.origin_request == "web":
+            ValidateOriginApiKey(self.transaction_key, self.transaction_auth_key).verify_api_Key_frontend()
             return self.validate_access_web_public()
         elif self.transaction_key and self.origin_request == "mobile":
+            ValidateOriginApiKey(self.transaction_key, self.transaction_auth_key).verify_api_Key_mobile()
             return self.validate_access_mobile()
         else:
-            raise Forbidden("Acceso denegado al recurso")
-            
+            raise Forbidden("Acceso denegado al recurso")     
+
     def getDataUser(self, user_id):
         try:
             return ManageClient().get_data_user(user_id)
@@ -95,7 +100,10 @@ class Authorization(BaseCommannd):
         return response
 
     def validate_access_mobile(self):
-        return
+        response = make_response({})
+        name_api_key = self.verify_configuration_access_mobile()
+        response.headers["X-Abcall-Transaction"] = os.environ.get(name_api_key)
+        return response
     
     def verify_configuration_access_web_public(self):
         params = request.args
@@ -134,14 +142,35 @@ class Authorization(BaseCommannd):
             
             if rol in roles:
                 planes_permitidos = roles[rol]
-                if plan not in planes_permitidos:
-                    raise Forbidden(f"El plan {plan} no tiene acceso a este recurso")
+                self.searchReourceAllow(plan, planes_permitidos)
             elif not roles:
                 logger.info("uri is public: " + uri_value)
             else:
                 raise Forbidden(f"El rol {rol} no tiene acceso a este recurso")
     
         return name_api_key
+    
+    def searchReourceAllow(self, plan, planes_permitidos):
+        if plan not in planes_permitidos:
+            raise Forbidden(f"El plan {plan} no tiene acceso a este recurso")
+    
+    def verify_configuration_access_mobile(self):
+        params = request.args
+        uri_value = params.get('uri')
+
+        configurations_access = self.loadConfigurations()
+        name_api_key = ""
+        data = self.searchRouteJson(configurations_access, uri_value)
+        if data:
+            name_api_key = data.get("name_api_key")
+            origin_request = data.get("origin_request")
+
+            if self.origin_request not in origin_request:
+                logger.info("El origen recibido no corresponde al esperado para mobile")
+                raise Forbidden("Acceso denegado al origen de la petición")
+    
+        return name_api_key
+
 
     def loadConfigurations(self):
         with open('configuration-access.json', 'r', encoding='utf-8') as file:
