@@ -14,16 +14,6 @@
         "origin_request": ["web","mobile"],
         "name_api_key": "API_KEY_AUTH_API"
     },
-    "/clients/create_client":{
-        "roles":{},
-        "origin_request": ["web"],
-        "name_api_key": "API_KEY_CLIENTE"
-    },
-    "/clients/get_client/": {
-        "roles":{},
-        "origin_request": ["web"],
-        "name_api_key": "API_KEY_CLIENTE"
-    },
     "/clients/update_client_plan": {
         "roles": {
             "CLIENTE": ["EMPRENDEDOR", "EMPRESARIO", "EMPRESARIO_PLUS"]

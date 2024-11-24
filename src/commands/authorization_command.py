@@ -181,6 +181,3 @@ class Authorization(BaseCommannd):
             if uri_value.startswith(prefix):
                 return value 
         return None
-
-
-
